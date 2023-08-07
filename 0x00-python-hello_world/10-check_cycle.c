@@ -6,18 +6,18 @@
  */
 int check_cycle(listint_t *list)
 {
-	listint_t *curr, *checker;
-	if(list == NULL || list->next == NULL)
-		return (0);
-	curr = list;
-	checker = curr->next;
-	while(curr != NULL && checker->next != NULL
-		&& checker->next->next != NULL)
-	{
-	if (current == check)
-	return (1);
-	current = current->next;
-	check = check->next->next;
-	}
+listint_t *curr, *checker;
+if(list == NULL || list->next == NULL)
 	return (0);
+curr = list;
+checker = curr->next;
+while(curr != NULL && checker->next != NULL
+	&& checker->next->next != NULL)
+{
+if (current == check)
+	return (1);
+current = current->next;
+check = check->next->next;
+}
+return (0);
 }
