@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def uppercase(string):
     for i in string:
         if 'a' <= i <= 'z':
