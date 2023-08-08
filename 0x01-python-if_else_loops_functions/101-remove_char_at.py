@@ -4,6 +4,6 @@ def remove_char_at(str, n):
     if n >= len(char_list):
         char_list[n] = ""
         new_string = ''.join(char_list)
+        return new_string
     else:
         return str
-    return new_string
