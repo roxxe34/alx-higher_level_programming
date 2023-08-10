@@ -9,11 +9,11 @@ if __name__ == "__main__":
     b = int(sys.argv[3])
     if argc != 3:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
-        exit(1)
+        sys.exit(1)
     else:
-        if operator != "+" and operator != "-" and operator != "*" and operator != "/":
+        if operator not in ("+", "/", "-", "*"):
             print("Unknown operator. Available operators: +, -, * and /")
-            exit(1)
+            sys.exit(1)
         elif operator == "+":
             print("{} {} {} = {}".format(a, operator, b, add(a, b)))
         elif operator == "-":
