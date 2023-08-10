@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-__import__("fastprint").fastprint()
+__import__("fastprint")
