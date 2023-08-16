@@ -5,18 +5,16 @@ def roman_to_int(roman_string):
     roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500,
                   'M': 1000}
     rom_list = [roman_dict[char] for char in roman_string]
-    final_number = 0
-    i = 0
-    while(i < len(rom_list)):
+    num = 0
+
+    for i in range(len(roman_string)):
         if roman_dict.get(roman_string[i], 0) == 0:
             return (0)
-        if i == len(rom_list) - 1:
-            final_number += rom_list[i]
-            break
-        if rom_list[i] >= rom_list[i + 1]:
-            final_number += rom_list[i]
-            i += 1
-        elif rom_list[i] < rom_list[i + 1]:
-            final_number += rom_list[i + 1] - rom_list[i]
-            i += 2
-    return final_number
+
+        if (i != (len(roman_string) - 1) and
+                roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]):
+                num += roman_dict[roman_string[i]] * -1
+
+        else:
+            num += roman_dict[roman_string[i]]
+    return (num)
