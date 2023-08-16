@@ -1,6 +1,10 @@
 #!/usr/bin/python3
-def multiply_by_2(a_dictionary):
-    new_dictionary = {}
+def complex_delete(a_dictionary, value):
+    keys_to_remove = []
     for k, v in a_dictionary.items():
-        new_dictionary[k] = a_dictionary[k] * 2
-    return new_dictionary
+        if v == value:
+            keys_to_remove.append(k)
+    for key in keys_to_remove:
+        a_dictionary.pop(key)
+
+    return a_dictionary
