@@ -8,6 +8,8 @@ def roman_to_int(roman_string):
     final_number = 0
     i = 0
     while(i < len(rom_list)):
+        if roman_dict.get(roman_string[i], 0) == 0:
+            return (0)
         if i == len(rom_list) - 1:
             final_number += rom_list[i]
             break
