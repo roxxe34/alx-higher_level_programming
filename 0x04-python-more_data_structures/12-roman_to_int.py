@@ -4,9 +4,7 @@ def roman_to_int(roman_string):
         return 0
     roman_dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500,
                   'M': 1000}
-
     rom_list = [roman_dict[char] for char in roman_string]
-
     final_number = 0
     i = 0
     while(i < len(rom_list)):
