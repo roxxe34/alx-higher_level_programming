@@ -13,7 +13,6 @@ def roman_to_int(roman_string):
         if i == len(rom_list) - 1:
             final_number += rom_list[i]
             break
-
         if rom_list[i] >= rom_list[i + 1]:
             final_number += rom_list[i]
             i += 1
