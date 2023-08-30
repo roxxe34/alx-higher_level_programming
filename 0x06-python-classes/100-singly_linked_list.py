@@ -128,8 +128,6 @@ class SinglyLinkedList:
             str: The string representation of the linked list.
         """
         new_list = []
-        if self.__head is None:
-            return None
         value = self.__head
         while value is not None:
             new_list.append(str(value.data))
