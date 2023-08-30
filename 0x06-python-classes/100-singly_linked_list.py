@@ -97,19 +97,6 @@ class SinglyLinkedList:
         """
         self.__head = None
 
-    def print_list(self):
-        """
-        Print the elements of the linked list.
-
-        If the linked list is empty, it prints "linked list is empty".
-        """
-        if self.__head is None:
-            print("linked list is empty")
-        value = self.__head
-        while value is not None:
-            print(value.data)
-            value = value.next_node
-
     def sorted_insert(self, value):
         """
         Insert a value into the linked list while maintaining sorted order.
