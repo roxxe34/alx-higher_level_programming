@@ -1,6 +1,18 @@
 #!/usr/bin/python3
 """
-nqueens backtracking program to print the coordinates of n queens
+N-Queens Backtracking Program
+
+This program uses backtracking to find and print the coordinates
+of N queens on an NxN chessboard such that no two queens threaten each other.
+
+Usage:
+    nqueens N
+
+Where:
+    - N (int): The number of queens to be placed on the chessboard.
+
+The program will print all possible solutions.
+
 """
 
 
