@@ -73,18 +73,22 @@ class Rectangle(Base):
                 print('#', end='')
             print()
 
+    # Public method to update attributes
     def update(self, *args, **kwargs):
-        if len(args) > 0:
-            if len(args) == 1:
-                self.id = args[0]
-            if len(args) == 2:
-                self.width = args[1]
-            if len(args) == 3:
+        num_args = len(args)
+
+        # Check the number of arguments passed
+        if num_args == 1:
+            self.id = args[0]
+        elif num_args >= 2:
+            self.id = args[0]
+            self.width = args[1]
+            if num_args >= 3:
                 self.height = args[2]
-            if len(args) == 4:
-                self.x = args[3]
-            if len(args) == 5:
-                self.y = args[4]
+                if num_args >= 4:
+                    self.x = args[3]
+                    if num_args >= 5:
+                        self.y = args[4]
         else:
                 if "id" in kwargs:
                     self.id = kwargs['id']
@@ -96,8 +100,8 @@ class Rectangle(Base):
                     self.x = kwargs['x']
                 if 'y' in kwargs:
                     self.y = kwargs['y']
-                    
-    
+    def to_dictionary(self):
+        return {'x': self.x, 'y': self.y, 'id': self.id, 'height': self.height, 'width': self.width}                
     
     def __str__(self):
         return  f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
