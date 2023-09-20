@@ -44,3 +44,5 @@
 | 19. File to instances | [models/base.py](./models/base.py) |
 | 20. JSON ok, but CSV? | [models/](./models/) |
 | 21. Let's draw it | [models/base.py](./models/base.py) |
+
+adding the  following
