@@ -20,3 +20,4 @@ if [[ -n $(git stash list) ]]; then
   echo "Popping stashed changes..."
   git stash pop
 fi
+
