@@ -9,4 +9,5 @@ if __name__ == "__main__":
     curr.execute("SELECT * FROM `states`")
     data = curr.fetchall()
     for i in data:
-        print(i)
+        for j in i:
+            print(j)
