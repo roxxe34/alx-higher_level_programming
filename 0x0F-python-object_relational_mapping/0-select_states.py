@@ -8,6 +8,5 @@ if __name__ == "__main__":
     curr = db.cursor()
     curr.execute("SELECT * FROM states ORDER BY states.id ASC")
     data = curr.fetchall()
-
     for row in data:
         print(row)
