@@ -1,8 +1,7 @@
 #!/usr/bin/node
-let convert = Number(process.argv[2]);
+const convert = Number(process.argv[2]);
 if (isNaN(convert)) {
   console.log('Not a number');
-}
-else {
+} else {
   console.log('My number: ' + convert);
 }
