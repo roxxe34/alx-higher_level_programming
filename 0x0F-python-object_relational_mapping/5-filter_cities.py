@@ -1,19 +1,42 @@
 #!/usr/bin/python3
-# Displays all cities of a given state from the
-# states table of the database hbtn_0e_4_usa.
-# Safe from SQL injections.
-# Usage: ./5-filter_cities.py <mysql username> \
-#                             <mysql password> \
-#                             <database name> \
-#                             <state name searched>
-import sys
-import MySQLdb
+"""
+List all states matching given name from a MySQL db on localhost at port 3306
+"""
 
-if __name__ == "__main__":
-    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
-    c = db.cursor()
-    c.execute("SELECT * FROM `cities` as `c` \
-                INNER JOIN `states` as `s` \
-                   ON `c`.`state_id` = `s`.`id` \
-                ORDER BY `c`.`id`")
-    print(", ".join([ct[2] for ct in c.fetchall() if ct[4] == sys.argv[4]]))
+from mysqlman import MySQLMan
+from MySQLdb import Error
+from sys import argv, exit, stderr
+
+
+HELP = '{} username password database search'.format(argv[0])
+HOST = 'localhost'
+PORT = 3306
+
+
+if __name__ == '__main__':
+    try:
+        params = {
+            'user': argv[1],
+            'password': argv[2],
+            'database': argv[3],
+            'host': HOST,
+            'port': PORT,
+        }
+        search = argv[4]
+    except IndexError:
+        stderr.write('usage: {}\n'.format(HELP))
+        exit(2)
+    try:
+        mysqlman = MySQLMan(connect=True, **params)
+    except Error as e:
+        stderr.write('{}\n'.format(e.args[1]))
+        exit(1)
+    query = """
+    SELECT c.name
+    FROM cities c, states s
+    WHERE c.state_id = s.id
+    AND s.name = %s
+    ORDER BY c.id;
+    """
+    results = mysqlman.query([query, (search,)])
+    print(', '.join(row[0] for row in results[0]))

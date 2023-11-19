@@ -1,13 +1,35 @@
 #!/usr/bin/python3
-# Lists all states from the database hbtn_0e_0_usa.
-# Usage: ./0-select_states.py <mysql username> \
-#                             <mysql password> \
-#                             <database name>
-import sys
-import MySQLdb
+"""
+List all states from a MySQL db on localhost at port 3306
+"""
 
-if __name__ == "__main__":
-    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
-    c = db.cursor()
-    c.execute("SELECT * FROM `states`")
-    [print(state) for state in c.fetchall()]
+from mysqlman import MySQLMan
+from MySQLdb import Error
+from sys import argv, exit, stderr
+
+
+HELP = '{} username password database'.format(argv[0])
+HOST = 'localhost'
+PORT = 3306
+
+
+if __name__ == '__main__':
+    try:
+        mysqlman = MySQLMan(
+            connect=True,
+            user=argv[1],
+            password=argv[2],
+            database=argv[3],
+            host=HOST,
+            port=PORT,
+        )
+    except IndexError:
+        stderr.write('usage: {}\n'.format(HELP))
+        exit(2)
+    except Error as e:
+        stderr.write('{}\n'.format(e.args[1]))
+        exit(1)
+    query = "SELECT id, name FROM states ORDER BY id;"
+    results = mysqlman.query([query, ()])
+    for row in results[0]:
+        print(row)

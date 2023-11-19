@@ -1,20 +1,39 @@
 #!/usr/bin/python3
-# Lists all City objects from the database hbtn_0e_101_usa.
-# Usage: ./102-relationship_cities_states_list.py <mysql username> /
-#                                                 <mysql password> /
-#                                                 <database name>
-import sys
+"""
+Create the state California with the city San Francisco
+"""
+
+from relationship_state import Base, State
+from relationship_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from relationship_state import State
-from relationship_city import City
+from sys import argv, exit, stderr
 
-if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
-                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
+
+HELP = '{} username password database'.format(argv[0])
+HOST = 'localhost'
+PORT = 3306
+URLFORMAT = '{dialect}+{driver}://{user}:{password}@{host}/{database}'
+
+
+if __name__ == '__main__':
+    try:
+        params = {
+            'dialect': 'mysql',
+            'driver': 'mysqldb',
+            'user': argv[1],
+            'password': argv[2],
+            'host': HOST,
+            'database': argv[3],
+        }
+    except IndexError:
+        stderr.write('usage: {}\n'.format(HELP))
+        exit(2)
+    engine = create_engine(URLFORMAT.format(**params), pool_pre_ping=True)
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    for city in session.query(City).order_by(City.id):
-        print("{}: {} -> {}".format(city.id, city.name, city.state.name))
+    results = session.query(City, State).filter(City.state_id == State.id)
+    for city, state in results.order_by(City.id).all():
+        print('{}: {} -> {}'.format(city.id, city.name, state.name))
+    session.close()

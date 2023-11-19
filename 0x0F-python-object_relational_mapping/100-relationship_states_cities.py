@@ -1,22 +1,42 @@
 #!/usr/bin/python3
-# Creates the State “California” with the City “San Francisco”
-# from the database hbtn_0e_100_usa.
-# Usage: ./100-relationship_states_cities.py <mysql username> /
-#                                            <mysql password> /
-#                                            <database name>
-import sys
+"""
+Create the state California with the city San Francisco
+"""
+
+from relationship_state import Base, State
+from relationship_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from relationship_state import State
-from relationship_city import Base, City
+from sys import argv, exit, stderr
 
-if __name__ == "__main__":
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}"
-                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
+
+HELP = '{} username password database'.format(argv[0])
+HOST = 'localhost'
+PORT = 3306
+URLFORMAT = '{dialect}+{driver}://{user}:{password}@{host}/{database}'
+
+
+if __name__ == '__main__':
+    try:
+        params = {
+            'dialect': 'mysql',
+            'driver': 'mysqldb',
+            'user': argv[1],
+            'password': argv[2],
+            'host': HOST,
+            'database': argv[3],
+        }
+    except IndexError:
+        stderr.write('usage: {}\n'.format(HELP))
+        exit(2)
+    engine = create_engine(URLFORMAT.format(**params), pool_pre_ping=True)
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    session.add(City(name="San Francisco", state=State(name="California")))
+    ca = State(name='California')
+    sf = City(name='San Francisco')
+    ca.cities.append(sf)
+    session.add(ca)
+    session.add(sf)
     session.commit()
+    session.close()
