@@ -8,10 +8,10 @@ if __name__ == '__main__':
     url = "http://0.0.0.0:5000/search_user"
     if len(sys.argv) < 1:
         print("No result")
-
-    letter = sys.argv[1]
-    r = requests.post(url, data={'q': letter})
-    data = r.text
+    else:
+        letter = sys.argv[1]
+        r = requests.post(url, data={'q': letter})
+        data = r.text
     try:
         data_dict = json.loads(data)
         if len(data_dict) == 0:
