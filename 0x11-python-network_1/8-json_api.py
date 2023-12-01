@@ -9,7 +9,7 @@ if __name__ == '__main__':
     r = requests.post(url, data={'q': letter})
     data = r.json()
     try:
-        if len(data) == 0:
+        if data == {}:
             print("No result")
         else:
             print("[{}] {}".format(data['id'], data['name']))
