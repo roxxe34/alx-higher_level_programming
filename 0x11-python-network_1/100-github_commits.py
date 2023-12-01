@@ -8,7 +8,11 @@ if __name__ == "__main__":
     owner = sys.argv[2]
     r = requests.get(
         f"https://api.github.com/repos/{sys.argv[1]}/{sys.argv[2]}/commits")
+
     data = r.json()
-    for d in range(10):
-        print("{}: {}".format(data[d]['sha'],
-                              data[d]["commit"]["author"]["name"]))
+    try:
+        for d in range(10):
+            print("{}: {}".format(data[d]['sha'],
+                                  data[d]["commit"]["author"]["name"]))
+    except IndexError:
+        pass
