@@ -10,9 +10,7 @@ if __name__ == "__main__":
         "https://api.github.com/repos/{}/{}/commits".format(
             sys.argv[2], sys.argv[1]))
     data = r.json()
-    try:
-        for d in range(10):
-            print("{}: {}".format(data[d]['sha'],
-                                  data[d]["commit"]["author"]["name"]))
-    except IndexError:
-        pass
+
+    for d in range(10):
+        print("{}: {}".format(data[d]['sha'],
+                              data[d]["commit"]["author"]["name"]))
