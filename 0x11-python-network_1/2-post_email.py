@@ -7,7 +7,7 @@ import sys
 url = sys.argv[1]
 value = sys.argv[2]
 
-data = urllib.parse.urlencode(value)
+data = urllib.parse.urlencode(tuple(value))
 data = data.encode("utf-8")
 req = urllib.request.Request(url, data)
 with urllib.request.urlopen(req) as response:
