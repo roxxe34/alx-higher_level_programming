@@ -7,8 +7,8 @@ import sys
 url = sys.argv[1]
 value = {'email': sys.argv[2]}
 
-data = urllib.parse.urlencode(value)
-data = data.encode("utf-8")
-req = urllib.request.Request(url, data)
-with urllib.request.urlopen(req) as response:
-    the_page = response.read()
+data = urllib.parse.urlencode(value).encode("ascii")
+
+request = urllib.request.Request(url, data)
+with urllib.request.urlopen(request) as response:
+    print(response.read().decode("utf-8"))
