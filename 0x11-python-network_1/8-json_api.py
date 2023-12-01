@@ -9,8 +9,8 @@ if __name__ == '__main__':
     letter = sys.argv[1]
     r = requests.post(url, data={'q': letter})
     data = r.text
-    if len(data) == 0:
+    data_dict = json.loads(data)
+    if len(data_dict) == 0:
         print("No result")
     else:
-        data_dict = json.loads(data)
         print("[{}] {}".format(data_dict['id'], data_dict['name']))
