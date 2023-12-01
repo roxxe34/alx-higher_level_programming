@@ -11,5 +11,6 @@ if __name__ == '__main__':
     data = r.text
     if len(data) == 0:
         print("No result")
-    data_dict = json.loads(data)
-    print("[{}] {}".format(data_dict['id'], data_dict['name']))
+    else:
+        data_dict = json.loads(data)
+        print("[{}] {}".format(data_dict['id'], data_dict['name']))
