@@ -7,8 +7,8 @@ if __name__ == "__main__":
     repository = sys.argv[1]
     owner = sys.argv[2]
     r = requests.get(
-        f"https://api.github.com/repos/{sys.argv[1]}/{sys.argv[2]}/commits")
-
+        "https://api.github.com/repos/{}/{}/commits".format(
+            sys.argv[2], sys.argv[1]))
     data = r.json()
     try:
         for d in range(10):
