@@ -9,14 +9,14 @@ if __name__ == '__main__':
     if len(sys.argv) < 1:
         print("No result")
     else:
-        letter = sys.argv[1]
-        r = requests.post(url, data={'q': letter})
-        data = r.text
-    try:
-        data_dict = json.loads(data)
-        if len(data_dict) == 0:
-            print("No result")
-        else:
-            print("[{}] {}".format(data_dict['id'], data_dict['name']))
-    except json.JSONDecodeError:
-        print("Not a valid JSON")
+        try:
+            letter = sys.argv[1]
+            r = requests.post(url, data={'q': letter})
+            data = r.text
+            data_dict = json.loads(data)
+            if len(data_dict) == 0:
+                print("No result")
+            else:
+                print("[{}] {}".format(data_dict['id'], data_dict['name']))
+        except json.JSONDecodeError:
+            print("Not a valid JSON")
