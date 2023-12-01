@@ -2,7 +2,6 @@
 """list 10 commits (from the most recent to oldest) of the repository rails"""
 import sys
 import requests
-from requests.auth import HTTPBasicAuth
 
 if __name__ == "__main__":
     repository = sys.argv[1]
