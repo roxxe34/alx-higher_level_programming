@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""Python script that sends a request to the URL and displays header"""
 import sys
 import requests
 
