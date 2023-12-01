@@ -9,9 +9,9 @@ if __name__ == '__main__':
     r = requests.post(url, data={'q': letter})
     data = r.json()
     try:
-        if data == {}:
+        if len(data) == 0:
             print("No result")
         else:
-            print("[{}] {}".format(data['id'], data['name']))
+            print("[{}] {}".format(data.get("id"), data.get("name")))
     except ValueError:
         print("Not a valid JSON")
